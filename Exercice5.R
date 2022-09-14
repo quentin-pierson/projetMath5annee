@@ -11,3 +11,6 @@ head(df, 4)
 p <- ggplot(data = df, aes(x = Trimestre, y = ann, group = 1)) 
 p + geom_line(linetype = "dashed", color = "steelblue")+
   geom_point(color = "steelblue")
+
+q <- ggplot(df, aes(x=ann)) + geom_histogram()
+q
