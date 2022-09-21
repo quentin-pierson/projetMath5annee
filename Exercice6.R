@@ -6,17 +6,18 @@ theme_set(
 )
 
 calcul_a <- function (x, y, x_mean, y_mean, size){
-  xy_val = 0
+  xy_val <- 0
   x_carree <- 0
   r <- 0
   size <- length(x)
-
-  for (i in 0:size){
+  
+  for (i in 1:size){
     r <- x[i] *y[i]
-    xy <- xy_val + r
+    xy_val <- xy_val + r
     print("---1---")
+    print("je suis r")
     print(r)
-    print(xy)
+    print(xy_val)
     print("---2---")
     print(" ")
     x_carree <- x_carree + (x[i] * x[i])
