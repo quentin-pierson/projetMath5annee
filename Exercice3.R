@@ -10,6 +10,7 @@ svd_own <- function(A){
   AAT <- A %*% t(A)
   AAT.e <- eigen(AAT)
   u.mat <- AAT.e$vectors
+
   u.mat[,2:4] <- u.mat[,2:4] * -1
   
   print(u.mat)
@@ -23,17 +24,18 @@ svd_own <- function(A){
   v.mat[,2:4] <- v.mat[,2:4] * -1
   
   print(v.mat)
+  
+  r <- sqrt(ATA.e$values)
+  r <- r * diag(length(r))
+  
+  print("R")
+  print(r)
 }
 
-#svd_own(A)
+svd_own(A)
 
 svd_own(B)
 "------------------"
-
-# https://rpubs.com/aaronsc32/singular-value-decomposition-r
-
-
-"-----------"
 
 B = rbind(c(-6, -8, -4, 5, -4), c(2, 7, -5, -6, 4),
           c(0, -1, -8, 2, 2) ,c(-1, -2, 4, 4, -8))

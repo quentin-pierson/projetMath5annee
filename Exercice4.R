@@ -7,6 +7,21 @@ A = rbind(c(-3, -3, -6, 6, 1), c(-1, -1, -1, 1, -2),
 B = rbind(c(-4, 0,-1,-20), c(-5,0,3,5,0),
           c(2,0,-1,-2,0) ,c(6,0,-3,-6,0))
 
+
+#Question 1 mano 
+pinve <- function(A, eps=1e-8){
+  L <- svd(A)
+  d <- L$d
+  i <- abs(d) > eps
+  d[i] <- 1/d[i]
+  L$v %*% diag(d, nrow=length(d)) %*% t(L$u)
+}
+
+pinve(A)
+
+
+
+
 #Question 1 
 pinv(A)
 pinv(B)
