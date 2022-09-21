@@ -1,40 +1,43 @@
 library(ggplot2)
+
 theme_set(
   theme_classic() +
     theme(legend.position = "top")
 )
 
-
 calcul_a <- function (x, y, x_mean, y_mean, size){
-  xy <- 0
-  x_carree = 0
-  
+  xy_val = 0
+  x_carree <- 0
+  r <- 0
   size <- length(x)
-  
+
   for (i in 0:size){
     r <- x[i] *y[i]
-    xy <- xy + r
-    print(r + xy)
+    xy <- xy_val + r
+    print("---1---")
+    print(r)
     print(xy)
+    print("---2---")
+    print(" ")
     x_carree <- x_carree + (x[i] * x[i])
   }
-  xy_mean <- xy / size
+  xy_mean <- xy_val / size
   x_carree_mean <- x_carree / size
   
+  print("-----")
   print(y_mean)
   print(x_mean)
-  print(xy)
+  print(xy_val)
   print(xy_mean)
   print(x_carree_mean)
+  print("-----")
   
   
   a <- (xy_mean - (x_mean * y_mean)) / (x_carree_mean - (x_mean * x_mean))
-  print(a)
   return(a)
 }
 calcul_b <- function (x_mean, y_mean, a){
   b <- y_mean - (a * x_mean)
-  print(b)
   return(b)
 }
 
