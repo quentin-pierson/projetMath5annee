@@ -30,12 +30,34 @@ tab_e <- as.table(tab_e)
 #INSTALL THIS => REdaS
 #formule :  β = r - e(r cos Θ)
 
-for (i in 0:5){
-  t = tab_teta[i]
-  r = tab_r[i]
+#for (i in 0:5){
+#  t = tab_teta[i]
+#  r = tab_r[i]
   
-  for (e in tab_e){
-    beta <- r - e * (r * cos(t))
-    print(beta)
-  }
-}
+#  for (e in tab_e){
+#    beta <- r - e * (r * cos(t))
+#    print(beta)
+#  }
+#}
+
+#e <- 0.810
+#B <- 14.511
+#a <- 76.374 
+#b <- 14.511
+e <- 19.9/(-10.1*cos(2.14)+30*cos(0.88))
+B <- 30 - e*(30*cos(0.88))
+
+a <- B/(1-e*cos(0))
+b <- B/(1-e*cos(pi/2))
+
+
+
+t <- seq(from = 0, to = 2*pi, by = 0.01)
+
+x <- B/(1-e*cos(t))*cos(t)
+y <- B/(1-e*cos(t))*sin(t)
+plot(x,y, pch=19, col='blue')
+
+
+
+
