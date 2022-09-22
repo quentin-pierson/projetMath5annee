@@ -87,3 +87,33 @@ DS <- c(DS, 0)
 print(DS)
 
 plot(y, DS, col="blue", type="l")
+
+#STEP 4
+MoyenneAnuuel <- c()
+for (i in 1:5){
+  k <- i * 4
+  moyenne_annuel <- (x[k-3] + x[k-2] + x[k-1] + x[k]) /4
+  MoyenneAnuuel <- c(MoyenneAnuuel, moyenne_annuel)
+}
+
+MoyenneTrimestre <- c()
+for (i in 1:4){
+  moyenne_trimestre <- (x[i] + x[i+4] + x[i+8] + x[i+12] + x[i+16]) /5
+  MoyenneTrimestre <- c(MoyenneTrimestre, moyenne_trimestre)
+}
+
+print(MoyenneAnuuel)
+print(MoyenneTrimestre)
+
+mm <-  (MoyenneAnuuel[1] + MoyenneAnuuel[2] + MoyenneAnuuel[3] + MoyenneAnuuel[4] + MoyenneAnuuel[5])/ 5
+print(mm)
+
+
+CoefficientS <- c()
+
+for(i in 1:4){
+  cs <- MoyenneTrimestre[i] / mm
+  CoefficientS <- c(CoefficientS, cs)
+}
+
+print(CoefficientS)
