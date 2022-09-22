@@ -41,11 +41,6 @@ df <- data.frame(Ventes=x,
                  Trimestre=y)
 head(df, 4)
 
-tt <- moindre_carre(x, y)
-
-print(tt)
-
-
 #STEP 1
 p <- ggplot(data = df, aes(x = Trimestre, y = Ventes, group = 1)) 
 p + geom_line(linetype = "dashed", color = "steelblue")+
@@ -54,17 +49,41 @@ p + geom_line(linetype = "dashed", color = "steelblue")+
 
 g <- plot(tt,col='red',type='l')
 
-q<- ggplot(df, aes(x=Ventes)) + geom_histogram()
-q
+#STEP 2
+tt <- moindre_carre(y, x)
+
+print(tt)
+plot(y, x, col="blue", type="l")
+abline(tt[2], tt[1], col = "red")
 
 #STEP 3
-tab_mb <- list()
-
-for (i in 1:16){
-  m <- ((x[i] * 1) + (x[i+1]*2) + (x[i+2]*3) + (x[i+3]*4))/(i*4+6)
-  print("moyenne mobile 4: ")
-  print(m)
-  append(tab_mb, m)
+MoyenneMobile <- c(0, 0)
+for (i in 3:18){
+  m <- 1/8*( x[i-2] + 2*x[i-1] + 2*x[i] + 2*x[i+1] + x[i-2] )
+  MoyenneMobile <- c(MoyenneMobile, m)
 }
-print(tab_mb)
+MoyenneMobile <- c(MoyenneMobile, 0)
+MoyenneMobile <- c(MoyenneMobile, 0)
+print(MoyenneMobile)
 
+Tendance = c()
+for (i in 1:20) {
+  t = tt[1] *i + tt[2]
+  Tendance <- c(Tendance, t)
+}
+print(Tendance)
+
+plot(y, MoyenneMobile, col="blue", type="l")
+lines(y, Tendance, col='green')
+
+DS <- c(0, 0)
+for (i in seq(3,18)) {
+  ds <- x[i] / MoyenneMobile[i]
+  DS <- c(DS, ds)
+}
+DS <- c(DS, 0)
+DS <- c(DS, 0)
+
+print(DS)
+
+plot(y, DS, col="blue", type="l")
