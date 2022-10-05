@@ -9,7 +9,7 @@ dataframe <- read.csv("donnees/base_conso.csv", header = TRUE, sep = ";") #
 #dataframe[is.na(dataframe)] <- 0
 #dataframe[x] <- as.numeric(dataframe[x]) 
 
-sapply(dataframe, class) 
+#sapply(dataframe, class) 
 
 cols <- names(dataframe) %in% c('individus')
 
@@ -23,16 +23,15 @@ df <- dataframe[!cols]
 data_coor <- round(cor(df),2)
 #data_coor
 
+#ggcorrplot(cor(data_coor))   
+
 corr_plot <- ggcorrplot(
   data_coor,
-  method = "square",
-  type="full",
+  type=c("upper"),
   hc.order=TRUE,
   lab=TRUE,
-  lab_size=3,
-  colors=c("red", "white", "red"),
-  title="Matrice de corrélation",
-  ggtheme=theme_bw
+  lab_size=2,
+  title="Matrice de corrélation"
 )
 
 corr_plot
