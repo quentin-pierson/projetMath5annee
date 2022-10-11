@@ -16,11 +16,11 @@ balloonplot(t (dt), main = "election", xlab = "", ylab = "",
 # On évalue si il y a une dépendance signicative 
 # entre les colonnes et les lignes
 
-chisq <- chisq.test (dataframe_election)
+chisq <- chisq.test (dt)
 chisq
 
 # Statistiques de khi2
-chi2 <- 1944.456
+chi2 <- 1284341
 
 df <- (nrow (dataframe_election) - 2) * (ncol (dataframe_election) - 2)
 
@@ -33,13 +33,16 @@ print(res.ca)
 eig.val <- get_eigenvalue (res.ca)
 eig.val
 
-fviz_screeplot (res.ca) +
+fviz_screeplot (res.ca, addlabels = TRUE) +
   geom_hline (yintercept = 33.33, linetype = 2, color = "red")
 
 fviz_ca_biplot (res.ca, repel = TRUE)
 
 row <- get_ca_row(res.ca)
 row
+
+print(res.ca$eig)
+head(res.ca$eig) 
 
 head(row$coord)
 # Cos2: qualité de représentation
