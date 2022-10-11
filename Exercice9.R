@@ -13,6 +13,7 @@ df <- read.csv(file = 'data/ex9_antal.csv', sep=";", header = TRUE, row.names = 
 head(df)
 
 res.ca <- CA(df, ncp = 3, graph=TRUE)
+summary(res.ca)
 print(res.ca)
 
 fviz_ca_biplot(res.ca, repel = TRUE) # Affiche le premier plan principal
