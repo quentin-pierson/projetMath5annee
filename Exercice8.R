@@ -1,32 +1,57 @@
-install.packages("ggcorrplot")                      # Install ggcorrplot package
-library("ggcorrplot")                               # Load ggcorrplot
+# Chargement des librairies
+library("FactoMineR")
+library("factoextra")
+library("ggcorrplot")
+library(ggplot2)
 
-dataframe <- read.csv("donnees/base_conso.csv", header = TRUE, sep = ";") # 
-#
-# views the data frame formed from the csv file
-#View(dataframe)
+full_dataframe <- read.csv("donnees/base_conso.csv", header = TRUE, sep = ";") 
 
-#dataframe[is.na(dataframe)] <- 0
-#dataframe[x] <- as.numeric(dataframe[x]) 
+# Définition des partitions des individus
+age_range = c(1,2,3,4,5,6,7)
+decile_range = c(9,10,11,12,13,14,15,16,17,18)
 
-#sapply(dataframe, class) 
+age_range_dataframe = full_dataframe[age_range,]
+decile_dataframe = full_dataframe[decile_range,]
 
-cols <- names(dataframe) %in% c('individus')
+#decile_dataframe
 
-df <- dataframe[!cols]
+#########################
+#########################
 
-#dataframe[is.na(dataframe)] <- 0
 
-#data$x1 <- as.numeric(as.character(data$x1))
+# Graphe basique
+#p <- ggplot(decile_dataframe, aes(x=decile_range)) + geom_density()
+#q <- ggplot(age_range_dataframe, aes() + geom_density())
+#p
+#q
 
-#data_coor <- round(cor(dataframe),2)
-data_coor <- round(cor(df),2)
-#data_coor
+cols <- names(decile_dataframe) %in% c('individus')
+df <- decile_dataframe[!cols]
 
-#ggcorrplot(cor(data_coor))   
+decile_dataframe_no_ind <- cor(df)
 
-corr_plot <- ggcorrplot(
-  data_coor,
+
+decile_dataframe.pca = PCA(decile_dataframe_no_ind)
+
+plot(decile_dataframe.pca)
+
+
+#########################
+#########################
+
+# Faire un dataframe de toutes les données
+# Faire un dataframe des données par tranches d'âge
+# Faire un dataframe des données par déciles
+
+
+# Exclusion de la colonnes individus
+cols <- names(full_dataframe) %in% c('individus')
+df <- full_dataframe[!cols]
+
+full_dataframe_coor <- cor(df)
+
+full_dataframe_corr_plot <- ggcorrplot(
+  full_dataframe_coor,
   type=c("upper"),
   hc.order=TRUE,
   lab=TRUE,
@@ -34,4 +59,4 @@ corr_plot <- ggcorrplot(
   title="Matrice de corrélation"
 )
 
-corr_plot
+full_dataframe_corr_plot
